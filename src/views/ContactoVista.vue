@@ -1,6 +1,8 @@
 <template>
     <div class="container">
         <form class="bg-light row d-flex justify-content-center" @submit.prevent="enviar" v-if="!enviado">
+            <h1 class="text-center d-2">Formulario de contacto</h1>
+            <h2 class="text-center d-4">¿Alguna duda? Nosotros te ayudamos</h2>
             <div class="row form-group">
                 <label for="nombre" class="col-2 col-form-label">Nombre</label>
                 <div class="col-10">
@@ -46,7 +48,7 @@
 
         <div v-if="enviado" class="submitted bg-light row d-flex justify-content-center">
             <div class="row form-group">
-                <h3>Gracias por tu tiempo</h3>
+                <h2>Gracias por tu tiempo</h2>
             </div>
             <div class="row form-group">
                 <p>Nombre: {{ nombre }}</p>

@@ -4,10 +4,10 @@
       <h2>T<span>Vue</span></h2>
     </div>
     <div class="logo">
-      <h3>Tu VUEscador de series</h3>
+      <h3>Tu <span>VUE</span>scador de series</h3>
     </div>
     <div class="d-flex justify-content-center">
-      <form class="search-bar d-flex justify-content-center" @submit.prevent="searchMovies">
+      <form class="search-bar d-flex justify-content-center">
         <input type="text" placeholder="Encuentra tu serie" v-model="queryBúsqueda" />
         <button type="submit">
           <uil-search class="search-icon" />
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import enviroment from '@/enviroment.js';
 import ListaSeries from '@/components/ListaSeries.vue';
 import { UilSearch } from '@iconscout/vue-unicons';
@@ -30,30 +30,28 @@ export default {
     UilSearch,
   },
   setup() {
-    const queryBúsqueda = ref("")
+    const queryBúsqueda = ref("");
     const series = ref([]);
     onMounted(() => {
-      fetch(`https://api.themoviedb.org/3/search/tv?api_key=${enviroment.apikey}&language=es&page=1&include_adult=false&query=${queryBúsqueda.value}`)
+      fetch(`https://api.themoviedb.org/3/search/tv?api_key=${enviroment.apikey}&language=es-ES&page=1&include_adult=false&query=${queryBúsqueda.value}`)
         .then(response => response.json())
         .then(data => {
           series.value = data.results.filter(serie => serie.poster_path !== null && serie.backdrop_path !== null)
           queryBúsqueda.value = ""
-        })
+        });
     });
-    const searchMovies = () => {
-      fetch(`https://api.themoviedb.org/3/search/tv?api_key=${enviroment.apikey}&language=es&page=1&include_adult=false&query=${queryBúsqueda.value}`)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-          series.value = data.results.filter(serie => serie.poster_path !== null && serie.backdrop_path !== null)
-          queryBúsqueda.value = ""
-        })
-    }
-
+    watch(() => queryBúsqueda.value,
+      async () => {
+        fetch(`https://api.themoviedb.org/3/search/tv?api_key=${enviroment.apikey}&language=es-ES&page=1&include_adult=false&query=${queryBúsqueda.value}`)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            series.value = data.results.filter(serie => serie.poster_path !== null && serie.backdrop_path !== null)
+          });
+      })
     return {
       queryBúsqueda,
-      series,
-      searchMovies,
+      series
     }
   }
 }
@@ -82,8 +80,8 @@ h3 {
   text-align: center;
 }
 
-h2 span {
-  color: #3EAF7C !important;
+span {
+  color: #3EAF7C;
 }
 
 .search-bar {

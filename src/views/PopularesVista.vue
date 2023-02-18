@@ -19,16 +19,13 @@ export default {
     setup() {
         const series = ref([]);
         onMounted(() => {
-            fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${enviroment.apikey}&language=es&page=1&include_adult=false&page=1`)
+            fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${enviroment.apikey}&language=es-ES&page=1&include_adult=false&page=1`)
                 .then(response => response.json())
                 .then(data => {
                     series.value = data.results.filter(serie => serie.poster_path !== null && serie.backdrop_path !== null)
                 })
         });
-
-        return {
-            series
-        }
+        return { series }
     }
 }
 </script>

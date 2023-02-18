@@ -12,7 +12,7 @@
           </div>
           <div class="overview">
             <p v-if="serie.overview != ''">{{ serie.overview }}</p>
-            <p v-else>Entra para ver más detalles...</p>
+            <p v-else>Entra para ver más detalles</p>
           </div>
         </div>
       </router-link>
@@ -65,7 +65,7 @@ export default {
         bottom: -170px;
         width: 100%;
         height: 100%;
-        background: linear-gradient(0deg, #3EAF7C 30%, transparent);
+        background: linear-gradient(0deg, grey 5%, transparent);
         transition: 0.5s;
         z-index: 1;
       }
@@ -109,7 +109,7 @@ export default {
       }
 
       span {
-        color: rgb(237, 237, 237, 0.7);
+        color: rgb(237, 237, 237, 0.9);
         font-weight: 400;
         font-size: 18px;
         text-shadow: 0 0 10px black;
@@ -123,11 +123,11 @@ export default {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-top:50px;
+        margin-top: 50px;
       }
 
       .star-icon {
-        color: yellow;
+        color: #3EAF7C;
         margin-left: 4px;
         margin-bottom: 5px;
         text-shadow: 0 0 10px black;
