@@ -7,12 +7,18 @@
       <h3>Tu <span>VUE</span>scador de series</h3>
     </div>
     <div class="d-flex justify-content-center">
-      <form class="search-bar d-flex justify-content-center">
+      <form class="search-bar d-flex justify-content-center" @submit.prevent>
         <input type="text" placeholder="Encuentra tu serie" v-model="queryBúsqueda" />
         <button type="submit">
           <uil-search class="search-icon" />
         </button>
       </form>
+    </div>
+    <div id="btn-group" class="mt-5">
+      <div v-for="genero in generos" :key="genero.id">
+        <input type="checkbox" class="btn-check" :id="`${genero.id}`" :value="`${genero.id}`" v-model="generosSelected">
+        <label class="btn btn-outline-success" :for="`${genero.id}`">{{ genero.name }}</label><br>
+      </div>
     </div>
     <ListaSeries :series="series" />
   </div>
@@ -32,27 +38,39 @@ export default {
   setup() {
     const queryBúsqueda = ref("");
     const series = ref([]);
+    const generos = ref([]);
+    const generosSelected = ref([]);
     onMounted(() => {
-      fetch(`https://api.themoviedb.org/3/search/tv?api_key=${enviroment.apikey}&language=es-ES&page=1&include_adult=false&query=${queryBúsqueda.value}`)
+      queryBúsqueda.value = ""
+      fetch(`https://api.themoviedb.org/3/genre/tv/list?api_key=${enviroment.apikey}&language=es-ES`)
         .then(response => response.json())
         .then(data => {
-          series.value = data.results.filter(serie => serie.poster_path !== null && serie.backdrop_path !== null)
-          queryBúsqueda.value = ""
+          generos.value = data.genres;
         });
     });
-    watch(() => queryBúsqueda.value,
+
+    watch(() => [queryBúsqueda.value, generosSelected.value],
       async () => {
-        fetch(`https://api.themoviedb.org/3/search/tv?api_key=${enviroment.apikey}&language=es-ES&page=1&include_adult=false&query=${queryBúsqueda.value}`)
-          .then(response => response.json())
-          .then(data => {
-            console.log(data)
-            series.value = data.results.filter(serie => serie.poster_path !== null && serie.backdrop_path !== null)
-          });
-      })
-    return {
-      queryBúsqueda,
-      series
-    }
+        if (queryBúsqueda.value == "") {
+          if (generosSelected.value.length == 0)
+            series.value = [];
+          else {
+            fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${enviroment.apikey}&language=es-ES&include_adult=false&with_genres=${generosSelected.value.join(",")}`)
+              .then(response => response.json())
+              .then(data => {
+                series.value = data.results.filter(serie => serie.poster_path !== null && serie.backdrop_path !== null)
+              });
+          }
+        } else {
+          fetch(`https://api.themoviedb.org/3/search/tv?api_key=${enviroment.apikey}&language=es-ES&include_adult=false&query=${queryBúsqueda.value}`)
+            .then(response => response.json())
+            .then(data => {
+              series.value = data.results.filter(serie => serie.poster_path !== null && serie.backdrop_path !== null &&
+                generosSelected.value.every(g => serie.genre_ids.includes(Number(g))))
+            });
+        }
+      });
+    return { queryBúsqueda, series, generos, generosSelected }
   }
 }
 </script>
@@ -130,5 +148,32 @@ button {
 
 button:hover>.search-icon {
   color: white;
+}
+
+#btn-group {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 50%;
+  margin-left: 25%;
+}
+
+.btn-outline-success {
+  --bs-btn-color: #3EAF7C;
+  --bs-btn-border-color: #3EAF7C;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #3EAF7C;
+  --bs-btn-hover-border-color: #3EAF7C;
+  --bs-btn-focus-shadow-rgb: 25, 135, 84;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #3EAF7C;
+  --bs-btn-active-border-color: #3EAF7C;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #3EAF7C;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #3EAF7C;
+  --bs-gradient: none;
 }
 </style>

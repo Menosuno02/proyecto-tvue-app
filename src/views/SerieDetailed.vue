@@ -15,7 +15,7 @@
                     <h2>{{ serie.name }}</h2>
                     <h4>{{ serie.tagline }}</h4>
                     <div v-for="genero in generos" :key="genero.id" class="serie-generos">
-                        <span v-if="generos.indexOf(genero) !== generos.length - 1" class="genero-name"><i>{{ genero.name
+                        <span v-if="generos.indexOf(genero) != generos.length - 1" class="genero-name"><i>{{ genero.name
                         }},
                             </i></span>
                         <span v-else class="genero-name"><i>{{ genero.name }}</i></span>
@@ -32,13 +32,17 @@
         </div>
 
         <div class="actores-slides">
+            <div class="serie-detail">
+                <div class="serie-text">
+                    <h3>Actores</h3>
+                </div>
+            </div>
             <vueper-slides class="no-shadow px-5 pt-5" :visible-slides="5" :arrows="false" :gap="3" :slide-ratio="1 / 4"
                 :slideMultiple="true">
                 <vueper-slide v-for="(slide, i) in actores" :key="i" :title="`${slide.name} (${slide.character})`">
                     <template #content>
                         <div class="card text-center">
-                            <img class="card-img-top"
-                                v-bind:src="`https://image.tmdb.org/t/p/original/${slide.profile_path}`">
+                            <img class="card-img-top" :src="`https://image.tmdb.org/t/p/original/${slide.profile_path}`">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <p>{{ slide.name }}</p>
@@ -158,7 +162,7 @@ svg.back-button {
             color: white;
             height: 100%;
             position: relative;
-            background-color: rgb(237, 237, 237, 0.25);
+            background-color: rgb(237, 237, 237, 0.3);
             border-radius: 20px;
             padding: 20px;
             margin-left: 40px;
@@ -170,6 +174,11 @@ svg.back-button {
                 margin-bottom: 7px;
                 max-width: 80%;
                 line-height: 100%;
+                font-weight: bold;
+            }
+
+            h3 {
+                font-size: 40px;
                 font-weight: bold;
             }
 
@@ -241,7 +250,7 @@ svg.back-button {
         position: absolute;
         top: 0;
         left: 0;
-        background: rgba(62, 175, 124, 0.9);
+        background: rgba(62, 175, 124, 0.8);
         color: white;
         width: 100%;
         height: 10%;
@@ -253,5 +262,10 @@ svg.back-button {
         align-items: center;
         vertical-align: center;
     }
+}
+</style>
+<style>
+.vueperslides__bullets button {
+    color: rgba(62, 175, 124, 0.9) !important;
 }
 </style>

@@ -1,19 +1,18 @@
 <template>
     <div class="container">
         <form class="bg-light row d-flex justify-content-center" @submit.prevent="enviar" v-if="!enviado">
-            <h1 class="text-center d-2">Formulario de contacto</h1>
             <h2 class="text-center d-4">¿Alguna duda? Nosotros te ayudamos</h2>
             <div class="row form-group">
                 <label for="nombre" class="col-2 col-form-label">Nombre</label>
                 <div class="col-10">
-                    <input v-model="nombre" type="text" class="form-control" id="nombre" placeholder="Introduce tu nombre">
+                    <input v-model="nombre" type="text" class="form-control" id="nombre" placeholder="Introduce tu nombre" required>
                 </div>
             </div>
 
             <div class="row form-group">
                 <label for="email" class="col-2 col-form-label">Email</label>
                 <div class="col-10">
-                    <input v-model="email" type="email" class="form-control" id="email" placeholder="Introduce tu email">
+                    <input v-model="email" type="email" class="form-control" id="email" placeholder="Introduce tu email" required>
                 </div>
             </div>
 
@@ -33,7 +32,7 @@
                 <label for="asunto" class="col-2 col-form-label">Asunto</label>
                 <div class="col-10">
                     <textarea id="asunto" v-model="asunto" for="asunto" class="form-control" rows="3"
-                        placeholder="..."></textarea>
+                        placeholder="..." required></textarea>
                 </div>
             </div>
 
