@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="actores-slides">
+        <div class="actores-slides" v-if="actores.length > 0">
             <div class="serie-detail">
                 <div class="serie-text">
                     <h3>Actores</h3>
