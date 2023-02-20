@@ -20,7 +20,8 @@
                 <label for="tipo" class="col-2 col-form-label">Selecciona la tipo de pregunta</label>
                 <div class="col-10">
                     <select v-model="tipo" class="form-select" id="tipo">
-                        <option :selected>Duda</option>
+                        <option disabled value="">Selecciona tipo</option>
+                        <option>Duda</option>
                         <option>Pregunta</option>
                         <option>Sugerencia</option>
                         <option>Otro</option>
@@ -70,7 +71,7 @@ export default {
         return {
             name: "",
             email: "",
-            select: "",
+            tipo: "",
             asunto: "",
             fichero: "",
             enviado: false
