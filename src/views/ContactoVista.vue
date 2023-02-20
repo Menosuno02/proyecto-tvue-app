@@ -20,7 +20,7 @@
                 <label for="tipo" class="col-2 col-form-label">Selecciona la tipo de pregunta</label>
                 <div class="col-10">
                     <select v-model="tipo" class="form-select" id="tipo">
-                        <option selected>Duda</option>
+                        <option :selected>Duda</option>
                         <option>Pregunta</option>
                         <option>Sugerencia</option>
                         <option>Otro</option>
