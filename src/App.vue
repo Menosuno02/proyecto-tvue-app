@@ -1,9 +1,10 @@
 <template>
   <header>
     <div class="header-container">
-      <router-link to="/" style="flex-grow: 2;">
+      <router-link to="/">
         <h1>T<span>Vue</span></h1>
       </router-link>
+      <div style="flex-grow: 2;"></div>
       <router-link to="/mejorvotadas" class="el-lista">
         <span class="source">Mejor votadas</span>
       </router-link>
