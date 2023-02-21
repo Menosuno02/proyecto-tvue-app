@@ -176,4 +176,10 @@ button:hover>.search-icon {
   --bs-btn-disabled-border-color: #3EAF7C;
   --bs-gradient: none;
 }
+
+.btn-outline-success:hover {
+  color: var(--bs-btn-hover-color);
+  background-color: var(--bs-btn-hover-bg);
+  border-color: var(--bs-btn-hover-border-color);
+}
 </style>
