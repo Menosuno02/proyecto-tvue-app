@@ -26,7 +26,7 @@ export default {
   props: ['series'],
   components: {
     UisStar,
-  },
+  }
 }
 </script>
 

@@ -5,10 +5,10 @@
         <h1>T<span>Vue</span></h1>
       </router-link>
       <div style="flex-grow: 2;"></div>
-      <router-link to="/mejorvotadas" class="el-lista">
+      <router-link to="/especial/mejorvotadas" class="el-lista">
         <span class="source">Mejor votadas</span>
       </router-link>
-      <router-link to="/populares" class="el-lista">
+      <router-link to="/especial/populares" class="el-lista">
         <span class="source">Populares</span>
       </router-link>
       <router-link to="/contacto" class="el-lista">
@@ -67,7 +67,7 @@ a {
 
 .el-lista {
   flex-grow: 0.1;
-  text-align:right;
+  text-align: right;
   transition: color 500ms;
 }
 

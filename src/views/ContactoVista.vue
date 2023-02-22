@@ -5,14 +5,16 @@
             <div class="row form-group">
                 <label for="nombre" class="col-2 col-form-label">Nombre</label>
                 <div class="col-10">
-                    <input v-model="nombre" type="text" class="form-control" id="nombre" placeholder="Introduce tu nombre" required>
+                    <input v-model="nombre" type="text" class="form-control" id="nombre" placeholder="Introduce tu nombre"
+                        required>
                 </div>
             </div>
 
             <div class="row form-group">
                 <label for="email" class="col-2 col-form-label">Email</label>
                 <div class="col-10">
-                    <input v-model="email" type="email" class="form-control" id="email" placeholder="Introduce tu email" required>
+                    <input v-model="email" type="email" class="form-control" id="email" placeholder="Introduce tu email"
+                        required>
                 </div>
             </div>
 
@@ -32,8 +34,8 @@
             <div class="row form-group">
                 <label for="asunto" class="col-2 col-form-label">Asunto</label>
                 <div class="col-10">
-                    <textarea id="asunto" v-model="asunto" for="asunto" class="form-control" rows="3"
-                        placeholder="..." required></textarea>
+                    <textarea id="asunto" v-model="asunto" for="asunto" class="form-control" rows="3" placeholder="..."
+                        required></textarea>
                 </div>
             </div>
 
@@ -81,7 +83,7 @@ export default {
         enviar: function () {
             this.enviado = true
         }
-    },
+    }
 };
 </script>
 <style scoped>

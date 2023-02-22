@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SearchVista from '../views/SearchVista.vue'
-import SerieDetail from '../views/SerieDetailed.vue'
-import PopularesVista from '../views/PopularesVista.vue'
-import MejorVotadasVista from '../views/MejorVotadasVista.vue'
+import SerieDetailed from '../views/SerieDetailed.vue'
 import ContactoVista from '../views/ContactoVista.vue'
+import ListaEspecialVista from '../views/ListaEspecialVista.vue'
 
 const routes = [
   {
@@ -15,19 +14,14 @@ const routes = [
   {
     path: '/serie/:id',
     name: 'Serie detallada',
-    component: SerieDetail
+    component: SerieDetailed
   },
 
   {
-    path: '/populares',
-    name: 'Series populares',
-    component: PopularesVista
-  },
-
-  {
-    path: '/mejorvotadas',
-    name: 'Series mejor votadas',
-    component: MejorVotadasVista
+    path: '/especial/:tipo',
+    name: 'Listas especiales',
+    component: ListaEspecialVista,
+    props: true
   },
 
   {

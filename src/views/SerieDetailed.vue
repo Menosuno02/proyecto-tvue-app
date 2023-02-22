@@ -80,14 +80,15 @@ export default {
                     serie.value = data;
                     generos.value = serie.value.genres;
                     rating.value = serie.value.vote_average.toFixed(1);
-                    anyos.value = serie.value.first_air_date.slice(0, 4) +
-                        " - " + serie.value.last_air_date.slice(0, 4);
+                    if (serie.value.first_air_date.slice(0, 4) == serie.value.last_air_date.slice(0, 4))
+                        anyos.value = serie.value.first_air_date.slice(0, 4);
+                    else
+                        anyos.value = serie.value.first_air_date.slice(0, 4) + " - " + serie.value.last_air_date.slice(0, 4);
                 });
             fetch(`https://api.themoviedb.org/3/tv/${route.params.id}/credits?api_key=${env.apikey}&language=es-ES`)
                 .then(response => response.json())
                 .then(data => { actores.value = data.cast; });
         });
-
         return { serie, route, generos, rating, anyos, actores }
     }
 }
