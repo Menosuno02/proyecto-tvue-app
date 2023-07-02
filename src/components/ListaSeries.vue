@@ -1,7 +1,7 @@
 <template>
   <div class="serie-list">
     <div class="serie-card" v-for="serie in series" :key="serie.id">
-      <router-link :to="'/serie/' + serie.id" class="serie-link">
+      <router-link :to="'/serie/' + (serie.id || '')" class="serie-link">
         <div class="serie-poster">
           <img :src="`https://image.tmdb.org/t/p/original/${serie.backdrop_path}`" :alt="serie.title" />
         </div>
@@ -11,7 +11,7 @@
             <span>{{ serie.vote_average }}</span><uis-star class="star-icon" />
           </div>
           <div class="overview">
-            <p v-if="serie.overview != ''">{{ serie.overview }}</p>
+            <p v-if="serie.overview">{{ serie.overview }}</p>
             <p v-else>Entra para ver más detalles</p>
           </div>
         </div>

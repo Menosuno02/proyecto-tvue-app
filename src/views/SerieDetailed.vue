@@ -7,6 +7,8 @@
                 <uil-arrow-left class="back-button" />
             </router-link>
 
+            <uil-star @click="clickFavorites" class="fav-button" />
+
             <div class="serie-poster">
                 <img :src="`https://image.tmdb.org/t/p/original/${serie.poster_path}`" :alt="serie.title + ' poster'" />
             </div>
@@ -56,7 +58,7 @@
     </div>
 </template>
 <script>
-import { ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import env from '@/enviroment.js';
 import { UilSchedule, UilStar, UilArrowLeft } from '@iconscout/vue-unicons';
@@ -73,6 +75,10 @@ export default {
         const rating = ref("");
         const anyos = ref("");
         const actores = ref([]);
+        const { checkFavs } = inject('favorites');
+        const clickFavorites = () => {
+            checkFavs(serie.value);
+        };
         onBeforeMount(() => {
             fetch(`https://api.themoviedb.org/3/tv/${route.params.id}?api_key=${env.apikey}&language=es-ES`)
                 .then(response => response.json())
@@ -89,12 +95,12 @@ export default {
                 .then(response => response.json())
                 .then(data => { actores.value = data.cast; });
         });
-        return { serie, route, generos, rating, anyos, actores }
+        return { serie, route, generos, rating, anyos, actores, clickFavorites, }
     }
 }
 </script>
 <style lang="scss" scoped>
-.back-button {
+.back-button, .fav-button {
     color: black;
     font-size: 40px;
     position: absolute;
@@ -104,11 +110,16 @@ export default {
     transition: color 500ms;
 }
 
-.back-button:hover {
+.fav-button {
+    position: absolute;
+    left: 7vh;
+}
+
+.back-button:hover, .fav-button:hover {
     color: white;
 }
 
-svg.back-button {
+svg.back-button, svg.fav-button {
     background: rgba(62, 175, 124, 0.8);
     border-radius: 50%;
     cursor: pointer;

@@ -11,6 +11,9 @@
       <router-link to="/especial/populares" class="el-lista">
         <span class="source">Populares</span>
       </router-link>
+      <router-link to="/favs" class="el-lista">
+        <span class="source">Favoritos</span>
+      </router-link>
       <router-link to="/contacto" class="el-lista">
         <span class="source">Contacto</span>
       </router-link>

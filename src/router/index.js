@@ -3,6 +3,7 @@ import SearchVista from '../views/SearchVista.vue'
 import SerieDetailed from '../views/SerieDetailed.vue'
 import ContactoVista from '../views/ContactoVista.vue'
 import ListaEspecialVista from '../views/ListaEspecialVista.vue'
+import FavoritosVista from '../views/FavoritosVista.vue'
 
 const routes = [
   {
@@ -21,6 +22,13 @@ const routes = [
     path: '/especial/:tipo',
     name: 'Listas especiales',
     component: ListaEspecialVista,
+    props: true
+  },
+
+  {
+    path: '/favs',
+    name: 'Favoritos',
+    component: FavoritosVista,
     props: true
   },
 
